@@ -3,8 +3,15 @@
         <title>Party Caculator</title>
     </head>
     <body>
-        <p>
-            hi there
-        </p>
+        <div> 
+            {% for party in parties %}
+               <p> {{party}} </p>
+            {% endfor %}
+        </div>
+        <div> 
+            {% for player in players %}
+               <p> {{player}} </p>
+            {% endfor %}
+        </div>
     </body>
 </html>

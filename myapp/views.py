@@ -6,5 +6,8 @@ from .models import Player, Party
 def helloworld(request):
     return HttpResponse('hello world!')
 
+
 def party_list(request):
-    return render (request, 'myapp/party_list.html',{})
+    parties = Party.objects.all().values()
+    players = Player.objects.all().values()
+    return render (request, 'myapp/party_list.html',{'parties':parties, 'players':players})
