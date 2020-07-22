@@ -1,16 +1,32 @@
+{% load static %}
 <html>
     <head>
         <title>Party Caculator</title>
+        <link rel="stylesheet" href="{% static 'css/myapp.css' %}">
+        
     </head>
     <body>
+        <table border = "1">
+        
+            {% for party in parties %}
+            <tr>
+                <td>{{party.title}} </td>
+            {% for player in players %} 
+                    {% if player.party_id == party.id %}
+                <td>{{player.title}}</td>
+                {% endif %}
+            {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
         <div> 
             {% for party in parties %}
-               <p> {{party}} </p>
-            {% endfor %}
-        </div>
-        <div> 
-            {% for player in players %}
-               <p> {{player}} </p>
+                <p> {{party}} </p>
+                {%for player in players %} 
+                    {% if player.party_id == party.id %}
+                        <p> {{player}}</p>
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
         </div>
     </body>
