@@ -5,7 +5,18 @@
         <link rel="stylesheet" href="{% static 'css/myapp.css' %}">
         
     </head>
+    <style>
+		div {
+			width: 150px;
+			height: 150px;
+			margin: 10px;
+			padding: 10px;
+			border: solid 15px #8B4513;
+			float: left;
+		}
+	</style>
     <body>
+        
         <table border = "1">
         
             {% for party in parties %}
@@ -19,6 +30,7 @@
             </tr>
             {% endfor %}
         </table>
+        <!--
         <div> 
             {% for party in parties %}
                 <p> {{party}} </p>
@@ -29,5 +41,26 @@
                 {% endfor %}
             {% endfor %}
         </div>
+        -->
+        <div ondrop="drop(event)" ondragover="dragEnter(event)">
+            <img id="clock" width="150" height="150"  src="https://image.flaticon.com/icons/svg/3154/3154187.svg" draggable="true" ondragstart="drag(event)">
+        </div>
+        <div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
+    
+        <script>
+            function dragEnter(ev) {
+                ev.preventDefault();
+            }
+    
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+            }
+    
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text");
+                ev.target.appendChild(document.getElementById(data));
+            }
+        </script>
     </body>
 </html>
