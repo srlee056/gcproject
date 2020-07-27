@@ -31,8 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'myapp.apps.MyappConfig',
-    'parsed_data.apps.ParsedDataConfig',
+    'myapp',
+    'parsed_data',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,12 +77,8 @@ WSGI_APPLICATION = 'gcsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'djongo_gc',
-        'USER' : 'imsolem1226',
-        'PASSWORD' : 'tjffpdla5',
-        #'HOST' : '127.0.0.1',
-        #'PORT' : '8000',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
     }
 }
@@ -112,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 

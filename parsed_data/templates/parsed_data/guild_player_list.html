@@ -1,0 +1,30 @@
+{% load static %}
+<html>
+    <head>
+        <title>Party Caculator</title>
+        <link rel="stylesheet" href="{% static 'css/myapp.css' %}">
+        
+    </head>
+
+    <style>
+        table, td {
+          border: 1px solid black;
+        }
+    </style>
+
+    <body>
+        
+        <table id = "myTable">
+            {% for player in players %}
+            <tr>
+                <td><img src="{{player.imgSrc}}"></td>
+                <td>{{player.name}} </td>
+                <td>{{player.character}} </td>
+                <td>{{player.level}} </td>
+            </tr>
+
+            {% endfor %}
+        </table><br>
+
+    </body>
+</html>

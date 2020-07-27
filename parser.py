@@ -4,6 +4,8 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
+
+
 ## Python이 실행될 때 DJANGO_SETTINGS_MODULE이라는 환경 변수에 현재 프로젝트의 settings.py파일 경로를 등록합니다.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gcsite.settings")
 ## 이제 장고를 가져와 장고 프로젝트를 사용할 수 있도록 환경을 만듭니다.
@@ -11,7 +13,6 @@ import django
 django.setup()
 
 from parsed_data.models import PlayerData
-
 
 def parse_guild_players():
     player_list = []
@@ -57,10 +58,13 @@ def parse_guild_players():
             )
             character = d.select('td.left > dl > dd')
             level = d.select('td:nth-child(3)')
-
             print(p2+ level[0].text)
+
             print(character[0].text)
             data = []
+
+            if level==None:
+                level[0].text = ""
             data.append(level[0].text)
             data.append(character[0].text)
             data.append(avatarImgSrc[0].text)
@@ -69,6 +73,24 @@ def parse_guild_players():
     return player_data_dict    
 
 if __name__ =='__main__':
+    print(len("https://avatar.maplestory.nexon.com/Character/LLPBHBDBGBEPEBNIGGJDEKLECENJGBKCAFMOFDAHMKMOLFEIONPFBDAHHLNNIFCAOAJMPKGFFPCBLKJJEGGAKNAIMOLKLOCKPCJMKKPOIOAMJLPOMNGAMCNDBGIDLEMFHDJHMGDBAMPGIGNBOLCIBJCOKFFIJPIFMDNCPFDFKFJHGPINLFDEBMCCDMBHCJMIGJCFJFDEFODIHNHBEGFJPENIGJJKKFPPGDEJOFBBEACCGFHMGPGKBNKJINFCNMCI.png"))
     player_data_dict = parse_guild_players()
     for p, d in player_data_dict.items():
-        PlayerData(imgSrc = d[2], name = p, level = d[0], character = d[1]).save()
+        playerdata = PlayerData
+        PlayerData(imgSrc = d[2], name = p, character = d[1],level = d[0]).save()
+
+
+
+        '''
+        print("start crwaling")
+    player_data_dict = parse_guild_players()
+    print("done crwaling")
+    for p, d in player_data_dict.items():
+        playerdata = PlayerData.objects.create(
+        imgSrc=d[2],
+        name=p,
+        character=d[1],
+        level = d[0]
+    )
+        
+        '''
