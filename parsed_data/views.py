@@ -4,5 +4,5 @@ from .models import PlayerData
 
 def guild_player_list(request):
     
-    players = PlayerData.objects.all()
+    players = PlayerData.objects.order_by('level')
     return render (request, 'parsed_data/guild_player_list.html',{'players':players})

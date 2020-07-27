@@ -8,23 +8,42 @@
 
     <style>
         table, td {
-          border: 1px solid black;
+          border: 1px solid rgb(230, 233, 207);
         }
     </style>
 
-    <body>
-        
-        <table id = "myTable">
-            {% for player in players %}
-            <tr>
-                <td><img src="{{player.imgSrc}}"></td>
-                <td>{{player.name}} </td>
-                <td>{{player.character}} </td>
-                <td>{{player.level}} </td>
-            </tr>
 
-            {% endfor %}
-        </table><br>
+    <body>
+
+        {% for player in players %}
+        <div draggable="true" ondragstart="drag(event)">   
+            <table>
+                <tr>
+                    <td width="80"><img src="{{player.imgSrc}}"></td>
+                    <td width="120">{{player.name}} </td>
+                    <td width="200">{{player.character}} </td>
+                    <td width="50">{{player.level}} </td>
+                </tr>
+            </table>  
+        </div>
+        {% endfor %}
+        <script>
+            function dragEnter(ev) {
+                ev.preventDefault();
+            }
+    
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+            }
+    
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text");
+                ev.target.appendChild(document.getElementById(data));
+            }
+
+        </script>
 
     </body>
+
 </html>

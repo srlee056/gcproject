@@ -51,6 +51,7 @@ def parse_guild_players():
         player_data = soup2.select(
             '#container > div > div > div:nth-child(4) > div.rank_table_wrap > table > tbody > tr.search_com_chk' 
         )
+        
 
         for d in player_data : 
             avatarImgSrc= d.select(
@@ -58,6 +59,7 @@ def parse_guild_players():
             )
             character = d.select('td.left > dl > dd')
             level = d.select('td:nth-child(3)')
+            print(avatarImgSrc[0].text)
             print(p2+ level[0].text)
 
             print(character[0].text)
@@ -65,7 +67,7 @@ def parse_guild_players():
 
             if level==None:
                 level[0].text = ""
-            data.append(level[0].text)
+            data.append(level[0].text[3:])
             data.append(character[0].text)
             data.append(avatarImgSrc[0].text)
             player_data_dict[p2] = data
@@ -73,7 +75,6 @@ def parse_guild_players():
     return player_data_dict    
 
 if __name__ =='__main__':
-    print(len("https://avatar.maplestory.nexon.com/Character/LLPBHBDBGBEPEBNIGGJDEKLECENJGBKCAFMOFDAHMKMOLFEIONPFBDAHHLNNIFCAOAJMPKGFFPCBLKJJEGGAKNAIMOLKLOCKPCJMKKPOIOAMJLPOMNGAMCNDBGIDLEMFHDJHMGDBAMPGIGNBOLCIBJCOKFFIJPIFMDNCPFDFKFJHGPINLFDEBMCCDMBHCJMIGJCFJFDEFODIHNHBEGFJPENIGJJKKFPPGDEJOFBBEACCGFHMGPGKBNKJINFCNMCI.png"))
     player_data_dict = parse_guild_players()
     for p, d in player_data_dict.items():
         playerdata = PlayerData
