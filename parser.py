@@ -59,7 +59,7 @@ def parse_guild_players():
             )
             character = d.select('td.left > dl > dd')
             level = d.select('td:nth-child(3)')
-            print(avatarImgSrc[0].text)
+            print(avatarImgSrc[0])
             print(p2+ level[0].text)
 
             print(character[0].text)
