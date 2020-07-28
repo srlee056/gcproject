@@ -23,7 +23,7 @@ def vote(request, player_id):
     player.level = pk=request.POST['p_level']
     player.save()
 
-    return HttpResponseRedirect(reverse('guild:results', args = (player.id,)))
+    return HttpResponseRedirect(reverse('guild:player'))
     
 def results(request, player_id):
     player=get_object_or_404(PlayerData, pk=player_id)
