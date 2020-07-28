@@ -19,7 +19,6 @@
             margin-right : -450px;
             padding-right : 450px;
             box-sizing : border-box;
-           
             
         }
         table, td, tr {
@@ -29,16 +28,36 @@
             border: 2px solid rgb(140, 151, 53);
             width: 400px;
             padding:10px;
+            margin: 10px;
             height :100%;
             overflow-y: scroll;
         }
         .dropbox2{
-            
-            padding:10px;
-            width: 400px;
-            height: 500px;
+         
+            width: 90%;
+            height: 350px;
             border: 1px solid blue;
             overflow-y: scroll;
+        }
+        .partyBox{
+            width:32%;
+            float:left;
+            
+        }
+        .partyHeader{
+            text-align:center;
+            background-color: lightcyan;
+            width: 90%;
+
+        }
+        .test{
+            white-space: nowrap;
+            padding:10px;
+            margin: 10px;
+            border: 1px solid pink;
+            overflow: auto;
+            height :100%
+        
         }
     </style>
 
@@ -48,8 +67,10 @@
         <div>
             
             <div class = left>
+                <button>추가</button>
                 <div class = dropbox1 ondrop="drop(event);" ondragover="dragEnter(event);">
                 {% for player in players %}
+
                 <div >   
                     <div id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
                             <span width="80"><img src="{{player.imgSrc}}" height="45"></span>
@@ -65,50 +86,53 @@
             
             
             <div class = right> 
-                <div class = dropbox2 id = demo ondrop="drop(event);" ondragover="dragEnter(event);">
-                    <p></p>
-                </div>
-
-                <div class = dropbox2 id = demo ondrop="drop(event);" ondragover="dragEnter(event);">
-                    <p></p>
-                </div>
+                <button>저장</button>
+                <div class = test>
+                    <div class = partyBox>
+                        <div class = partyHeader width>1파티</div>
+                        <div class = dropbox2 id = p1 ondrop="drop(event);" ondragover="dragEnter(event);">
+                            <p></p>
+                        </div>
+                    </div>  
+                    <div class = partyBox>
+                        
+                        <div class = partyHeader>2파티</div>
+                        <div class = dropbox2 id = p2 ondrop="drop(event);" ondragover="dragEnter(event);">
+                            <p></p>
+                        </div>  
+                    </div>      
+                    
+                    <div class = partyBox>
+                        
+                        <div class = partyHeader>3파티</div>
+                        <div class = dropbox2 id = p3 ondrop="drop(event);" ondragover="dragEnter(event);">
+                            <p></p>
+                        </div>  
+                    </div>
+                    <div class = partyBox>
+                        <div class = partyHeader width>4파티</div>
+                        <div class = dropbox2 id = p1 ondrop="drop(event);" ondragover="dragEnter(event);">
+                            <p></p>
+                        </div>
+                    </div>  
+                    <div class = partyBox>
+                        
+                        <div class = partyHeader>5파티</div>
+                        <div class = dropbox2 id = p2 ondrop="drop(event);" ondragover="dragEnter(event);">
+                            <p></p>
+                        </div>  
+                    </div>      
+                    
+                    <div class = partyBox>
+                        
+                        <div class = partyHeader>6파티</div>
+                        <div class = dropbox2 id = p3 ondrop="drop(event);" ondragover="dragEnter(event);">
+                            <p></p>
+                        </div>  
+                    </div>        
+                </div>  
     
-                <div>
-                    <table >
-                        <tr>
-                            <td colspan="7" width="700">"여기로 드래그"</td>
-                        </tr>
-                        <tr>
-                            <td width="80" height = "40">"1파티"</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td width="80" height = "40">"2파티"</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td width="80" height = "40">"3파티"</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                        </tr>
-                        
-                        
-                    </table>
-                </div>
+                
             </div>
            
           
