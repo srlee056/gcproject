@@ -16,8 +16,8 @@
         div.right {
             float : right;
             width : 100%;
-            margin-right : -450px;
-            padding-right : 450px;
+            margin-left : -450px;
+            padding-left : 450px;
             box-sizing : border-box;
             
         }
@@ -36,25 +36,26 @@
          
             width: 90%;
             height: 350px;
-            border: 1px solid blue;
+            border: 2px solid rgb(167, 167, 223);
             overflow-y: scroll;
         }
         .partyBox{
             width:32%;
             float:left;
-            
+            padding-bottom: 10px;
         }
         .partyHeader{
             text-align:center;
-            background-color: lightcyan;
+            color: rgb(167, 167, 223);
             width: 90%;
+            
 
         }
         .test{
             white-space: nowrap;
             padding:10px;
             margin: 10px;
-            border: 1px solid pink;
+            border: 2px solid pink;
             overflow: auto;
             height :100%
         
@@ -74,7 +75,10 @@
                 <div >   
                     <div id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
                             <span width="80"><img src="{{player.imgSrc}}" height="45"></span>
-                            <span width="120" height="45">{{player.name}} </span>
+                            
+                            <span width="120" height="45">
+                                <a href="{% url 'guild:detail' player.id %}"> {{player.name}} </a>
+                                 </span>
                             <span width="200" height="45">{{player.character}} </span>
                             <span width="50" height="45">{{player.level}} </span>
                     </div>  

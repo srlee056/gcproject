@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Player detail</title>
+        
+        
+    </head>
+    <body>
+        <form action = "{% url 'guild:vote' player.id %}" method="post">
+            {% csrf_token %}
+            <input type ="text" name = "p_name" value = "{{player.name}}">
+            <br>
+            <input type ="text" name = "p_character" value = "{{player.character}}">
+            <br>
+            <input type ="text" name = "p_level" value = "{{player.level}}">
+            <br>
+        <input type="submit" value = "Submit">    
+        </form>
+    </body>
+</html>
