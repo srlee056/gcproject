@@ -1,0 +1,63 @@
+body{
+    background: white url("images/image.png") no-repeat;
+    background-position: right bottom;
+}
+
+li a{
+    color: green
+}
+div.left {
+    width: 400px;
+    float: left;
+    
+}
+span.pData{
+    display: inline;
+}
+div.right {
+    float : right;
+    width : 100%;
+    margin-left : -400px;
+    padding-left : 400px;
+    box-sizing : border-box;
+    
+}
+span{
+    display:inline-block;
+    
+}
+.dropbox1{
+    border: 2px solid rgb(140, 151, 53);
+    width: 350px;
+    padding:10px;
+    margin: 10px;
+    height :100%;
+    overflow-y: scroll;
+}
+.dropbox2{
+ 
+    width: 90%;
+    height: 450px;
+    border: 2px solid rgb(167, 167, 223);
+    overflow-y: scroll;
+}
+.partyBox{
+    width:32%;
+    float:left;
+    padding-bottom: 10px;
+}
+.partyHeader{
+    text-align:center;
+    color: rgb(167, 167, 223);
+    width: 90%;
+}
+
+.test{
+    white-space: nowrap;
+    padding:10px;
+    margin: 10px;
+    border: 2px solid pink;
+    overflow: auto;
+    height :100%
+
+}

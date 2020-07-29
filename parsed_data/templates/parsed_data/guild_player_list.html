@@ -1,86 +1,37 @@
-{% load static %}
+
+
 <html>
     <head>
         <title>Party Caculator</title>
-        
+        {% load static %}
+        <link rel= "stylesheet" type="text/css" href = "{% static 'parsed_data/style.css' %}">
         
     </head>
-
-    <style>
-        
-        div.left {
-            width: 450px;
-            float: left;
-            
-        }
-        div.right {
-            float : right;
-            width : 100%;
-            margin-left : -450px;
-            padding-left : 450px;
-            box-sizing : border-box;
-            
-        }
-        table, td, tr {
-          border: 1px solid rgb(230, 233, 207);
-        }
-        .dropbox1{
-            border: 2px solid rgb(140, 151, 53);
-            width: 400px;
-            padding:10px;
-            margin: 10px;
-            height :100%;
-            overflow-y: scroll;
-        }
-        .dropbox2{
-         
-            width: 90%;
-            height: 350px;
-            border: 2px solid rgb(167, 167, 223);
-            overflow-y: scroll;
-        }
-        .partyBox{
-            width:32%;
-            float:left;
-            padding-bottom: 10px;
-        }
-        .partyHeader{
-            text-align:center;
-            color: rgb(167, 167, 223);
-            width: 90%;
-            
-
-        }
-        .test{
-            white-space: nowrap;
-            padding:10px;
-            margin: 10px;
-            border: 2px solid pink;
-            overflow: auto;
-            height :100%
-        
-        }
-    </style>
-
-
     <body>
 
+        <div class = buttons>
+            <button onclick="location.href='create'">추가</button>
+            <button>파티 저장</button>
+
+        </div>
         <div>
             
             <div class = left>
-                <button>추가</button>
                 <div class = dropbox1 ondrop="drop(event);" ondragover="dragEnter(event);">
                 {% for player in players %}
 
                 <div >   
-                    <div id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
-                            <span width="80"><img src="{{player.imgSrc}}" height="45"></span>
+                    <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
                             
-                            <span width="120" height="45">
+                            <span class = pData><img src="{{player.imgSrc}}" height="45px"></span>
+                            
+                            <span class = pData width="120px" height="45px">
                                 <a href="{% url 'guild:detail' player.id %}"> {{player.name}} </a>
                                  </span>
-                            <span width="200" height="45">{{player.character}} </span>
-                            <span width="50" height="45">{{player.level}} </span>
+                            <span class = pData width="80px" height="45px">{{player.character}} </span>
+                            <span class = pData width="50px" height="45px">{{player.level}} </span>
+                            <span class = pData width="50px" height="45px">{{player.mrFloor}}</span>
+                            <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
                     </div>  
                     
                 </div>
@@ -90,7 +41,6 @@
             
             
             <div class = right> 
-                <button>저장</button>
                 <div class = test>
                     <div class = partyBox>
                         <div class = partyHeader width>1파티</div>

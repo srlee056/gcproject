@@ -41,13 +41,44 @@ def parse_guild_players():
 
     player_data_dict={}
     for p2 in player_list:
-        url2 = 'https://maplestory.nexon.com/Ranking/World/Total?c='
+        #url2 = 'https://maplestory.nexon.com/Ranking/World/Total?c='
+        url2 = "https://maple.gg/u/"
         req2 = requests.get(url2 + p2)
         #print (url2+ p2)
 
         html2 = req2.text
         soup2 = BeautifulSoup(html2, 'html.parser')
 
+        avatarImgSrc= d.select(
+            '#user-profile > section > div > div.col-lg-4.pt-1.pt-sm-0.pb-1.pb-sm-0.text-center.mt-2.mt-lg-0 > div > div.col-6.col-md-8.col-lg-6 > img'
+        )
+        character = d.select(
+            '#user-profile > section > div > div.col-lg-8 > div.user-summary > ul > li:nth-child(2)'
+            )
+        level = d.select(
+            '#user-profile > section > div > div.col-lg-8 > div.user-summary > ul > li:nth-child(1)'
+            )
+        mrData = d.select{
+            '#app > div.card.border-bottom-0 > div > section > div.row.text-center > div:nth-child(1)'
+        }
+        if mrData.select('section > div > div.text-secondary') == '기록이 없습니다' :
+            mrFloor = 0
+        else:
+            mrFloor = mrData.select(
+                'section > div > div.pt-4.pt-sm-3.pb-4 > div > h1'
+            )
+        print(avatarImgSrc[0].src)
+        print(p2+ level[0].text)
+
+        print(character[0].text)
+        data = []
+
+        data.append(level[0].text[3:])
+        data.append(character[0].text)
+        data.append(avatarImgSrc[0].src)
+        player_data_dict[p2] = data
+
+    '''
         player_data = soup2.select(
             '#container > div > div > div:nth-child(4) > div.rank_table_wrap > table > tbody > tr.search_com_chk' 
         )
@@ -71,6 +102,7 @@ def parse_guild_players():
             data.append(character[0].text)
             data.append(avatarImgSrc[0].src)
             player_data_dict[p2] = data
+            '''
 
     return player_data_dict    
 
