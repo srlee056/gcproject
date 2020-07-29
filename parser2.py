@@ -12,7 +12,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gcsite.settings")
 import django
 django.setup()
 
-from parsed_data.models import PlayerData
+from parsed_data.models import PlayerData,Party
 
 def parse_guild_players():
     player_list = PlayerData.objects.order_by('-level')
@@ -61,16 +61,22 @@ def parse_guild_players():
         p2.mrFloor = mrFloor
         #print(character[0].text)
         #print(mrFloor)
-
+        party = Party()
+        party.id = 0
+        party.name="분류 전"
+        party.save()
+        
+        print(party)
+        p2.party = party
         p2.save()
         '''data = []
 
         data.append(level[0].text[3:])
         data.append(character[0].text)
         data.append(avatarImgSrc[0].src)
-        player_data_dict[p2] = data'''
+        player_data_dict[p2] = data
 
-    '''
+ 
         player_data = soup2.select(
             '#container > div > div > div:nth-child(4) > div.rank_table_wrap > table > tbody > tr.search_com_chk' 
         )
@@ -93,18 +99,17 @@ def parse_guild_players():
             data.append(level[0].text[3:])
             data.append(character[0].text)
             data.append(avatarImgSrc[0].src)
-            player_data_dict[p2] = data
-            '''
+            player_data_dict[p2] = data'''
+           
     player_data_dict ={}
     return player_data_dict    
 
 if __name__ =='__main__':
     player_data_dict = parse_guild_players()
-    for p, d in player_data_dict.items():
+    
+    '''for p, d in player_data_dict.items():
         playerdata = PlayerData
-        PlayerData(imgSrc = d[2], name = p, character = d[1],level = d[0]).save()
-
-        '''
+        PlayerData(imgSrc = d[2], name = p, character = d[1],level = d[0], mrFloor=).save()
         print("start crwaling")
     player_data_dict = parse_guild_players()
     print("done crwaling")

@@ -8,13 +8,13 @@ class PlayerData(models.Model):
     level = models.CharField(max_length=200)
     mrFloor = models.CharField(max_length=200)
     
-    '''party = models.ForeignKey(
+    party = models.ForeignKey(
         'Party',
         on_delete = models.CASCADE,
-    )'''
+    )
 
 class Party(models.Model):
-    name = models.IntegerField()
+    name = models.CharField(max_length=200)
 
 '''
 class mCharacter(models.Model):
