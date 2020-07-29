@@ -27,7 +27,7 @@ def detail(request, player_id):
 def vote(request, player_id):
     player=get_object_or_404(PlayerData, pk=player_id)
     pParty=get_object_or_404(Party, pk=request.POST['p_party'])
-    print(player.party.id)
+    #print(player.party.id)
     player.imgSrc = request.POST['p_imgSrc']
     player.name = request.POST['p_name']
     player.character = request.POST['p_character']
@@ -35,10 +35,10 @@ def vote(request, player_id):
     player.mrFloor = request.POST['p_mrFloor']
     player.party = pParty
     
-    print(player.party)
+    #print(player.party)
    
     player.save()
-    print(player)
+    #print(player)
 
     return HttpResponseRedirect(reverse('guild:player'))
 
@@ -49,12 +49,14 @@ def create(request):
 
 def add(request):
     player=PlayerData()
-    
+    pParty=get_object_or_404(Party, pk=request.POST['p_party'])
+
     player.imgSrc = request.POST['p_imgSrc']
     player.name = request.POST['p_name']
     player.character = request.POST['p_character']
     player.level = pk=request.POST['p_level']
     player.mrFloor = pk=request.POST['p_mrFloor']
+    player.party = pParty
     player.save()
 
     return HttpResponseRedirect(reverse('guild:player'))
