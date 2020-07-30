@@ -6,6 +6,7 @@
         {% load static %}
         <link rel= "stylesheet" type="text/css" href = "{% static 'parsed_data/style.css' %}">
         
+        
     </head>
     <body>
 
@@ -18,7 +19,7 @@
             
             <div class = left>
                 <div class = dropbox1 ondrop="drop(event);" ondragover="dragEnter(event);">
-                {% for player in players.0 %}
+                {% for player in UCPlayers %}
 
                 <div >   
                     <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
@@ -42,12 +43,53 @@
             
             <div class = right> 
                 <div class = test>
+
+                    {% for players in playersList %}
                     <div class = partyBox>
-                        <div class = partyHeader width>1파티</div>
-                        <div class = dropbox2 id = p1 ondrop="drop(event);" ondragover="dragEnter(event);">
+
+                        <div class = partyHeader width>파티</div>
+                        
+                        <div class = dropbox2 ondrop="drop(event);" ondragover="dragEnter(event);">
                             
-                            {% for player in players.1 %}
-                
+                            <span class = buffBox>
+                            {% for player in players %}
+                             <!--이 부분 따로 table 만들어서 연동하는것으로 바꾸기-->
+                                {% if player.character == "비숍" %}
+                                <img src = "{% static 'parsed_data/images/advanced_blessing.png' %}" alt = "어블" >
+                                <img src = "{% static 'parsed_data/images/pray.png' %}" alt = "프레이">
+                                {% elif player.character == "팔라딘" %}
+                                <img src = "{% static 'parsed_data/images/combat_orders.png' %}" alt = "컴뱃">
+                                {% elif player.character == "메카닉" %}
+                                <img src = "{% static 'parsed_data/images/support_unit_H-EX.png' %}" alt = "웨이버">
+                                {% elif player.character == "플레임위자드" %}
+                                <img src = "{% static 'parsed_data/images/burning_region.png' %}" alt = "버닝리전">
+                                {% elif player.character == "와일드헌터" %}
+                                <img src = "{% static 'parsed_data/images/sharp_eyes.png' %}" alt = "샤프아이즈">
+                                <img src = "{% static 'parsed_data/images/hauling.png' %}" alt = "하울링">
+                                {% elif player.character == "패스파인더" %}
+                                <img src = "{% static 'parsed_data/images/sharp_eyes.png' %}" alt = "샤프아이즈">
+                                {% elif player.character == "보우마스터" %}
+                                <img src = "{% static 'parsed_data/images/sharp_eyes.png' %}" alt = "샤프아이즈">
+                                {% elif player.character == "신궁" %}
+                                <img src = "{% static 'parsed_data/images/sharp_eyes.png' %}" alt = "샤프아이즈">
+                                {% elif player.character == "윈드브레이커" %}
+                                <img src = "{% static 'parsed_data/images/sharp_eyes.png' %}" alt = "샤프아이즈">
+                                {% elif player.character == "제로" %}
+                                <img src = "{% static 'parsed_data/images/zero_time_distortion.png' %}" alt = "타임디스토션">
+                                {% elif player.character == "은월" %}
+                                <img src = "{% static 'parsed_data/images/soul_splitter.png' %}" alt = "분혼격참">
+                                {% elif player.character == "캡틴" %}
+                                <img src = "{% static 'parsed_data/images/wind_booster.png' %}" alt = "윈드부스터">
+                                {% elif player.character == "바이퍼" %}
+                                <img src = "{% static 'parsed_data/images/wind_booster.png' %}" alt = "윈드부스터">
+                                {% elif player.character == "캐논슈터" %}
+                                <img src = "{% static 'parsed_data/images/wind_booster.png' %}" alt = "윈드부스터">
+                                    
+                                {% endif %}
+                            
+                            {% endfor %}
+                            </span>
+                            {% for player in players %}
                                 <div >   
                                     <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
                                             
@@ -64,131 +106,14 @@
                                     
                                 </div>
                             {% endfor %}
+                            
+                            
                                  
                         </div>
-                    </div>  
-                    <div class = partyBox>
-                        
-                        <div class = partyHeader>2파티</div>
-                        <div class = dropbox2 id = p2 ondrop="drop(event);" ondragover="dragEnter(event);">
-                            
-                            {% for player in players.2 %}
-                
-                                <div >   
-                                    <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
-                                            
-                                            <span class = pData><img src="{{player.imgSrc}}" height="45px"></span>
-                                            
-                                            <span class = pData width="120px" height="45px">
-                                                <a href="{% url 'guild:detail' player.id %}"> {{player.name}} </a>
-                                                 </span>
-                                            <span class = pData width="80px" height="45px">{{player.character}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.level}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.mrFloor}}</span>
-                                            <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
-                                    </div>  
-                                    
-                                </div>
-                            {% endfor %}
-                        </div>  
-                    </div>      
                     
-                    <div class = partyBox>
-                        
-                        <div class = partyHeader>3파티</div>
-                        <div class = dropbox2 id = p3 ondrop="drop(event);" ondragover="dragEnter(event);">
-                            {% for player in players.3 %}
-                
-                                <div >   
-                                    <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
-                                            
-                                            <span class = pData><img src="{{player.imgSrc}}" height="45px"></span>
-                                            
-                                            <span class = pData width="120px" height="45px">
-                                                <a href="{% url 'guild:detail' player.id %}"> {{player.name}} </a>
-                                                 </span>
-                                            <span class = pData width="80px" height="45px">{{player.character}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.level}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.mrFloor}}</span>
-                                            <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
-                                    </div>  
-                                    
-                                </div>
-                            {% endfor %}
-                        </div>  
                     </div>
-                    <div class = partyBox>
-                        <div class = partyHeader width>4파티</div>
-                        <div class = dropbox2 id = p1 ondrop="drop(event);" ondragover="dragEnter(event);">
-                            {% for player in players.4 %}
-                
-                                <div >   
-                                    <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
-                                            
-                                            <span class = pData><img src="{{player.imgSrc}}" height="45px"></span>
-                                            
-                                            <span class = pData width="120px" height="45px">
-                                                <a href="{% url 'guild:detail' player.id %}"> {{player.name}} </a>
-                                                 </span>
-                                            <span class = pData width="80px" height="45px">{{player.character}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.level}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.mrFloor}}</span>
-                                            <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
-                                    </div>  
-                                    
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>  
-                    <div class = partyBox>
-                        
-                        <div class = partyHeader>5파티</div>
-                        <div class = dropbox2 id = p2 ondrop="drop(event);" ondragover="dragEnter(event);">
-                            {% for player in players.5 %}
-                
-                                <div >   
-                                    <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
-                                            
-                                            <span class = pData><img src="{{player.imgSrc}}" height="45px"></span>
-                                            
-                                            <span class = pData width="120px" height="45px">
-                                                <a href="{% url 'guild:detail' player.id %}"> {{player.name}} </a>
-                                                 </span>
-                                            <span class = pData width="80px" height="45px">{{player.character}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.level}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.mrFloor}}</span>
-                                            <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
-                                    </div>  
-                                    
-                                </div>
-                            {% endfor %}
-                        </div>  
-                    </div>      
-                    
-                    <div class = partyBox>
-                        
-                        <div class = partyHeader>6파티</div>
-                        <div class = dropbox2 id = p3 ondrop="drop(event);" ondragover="dragEnter(event);">
-                            {% for player in players.6 %}
-                
-                                <div >   
-                                    <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
-                                            
-                                            <span class = pData><img src="{{player.imgSrc}}" height="45px"></span>
-                                            
-                                            <span class = pData width="120px" height="45px">
-                                                <a href="{% url 'guild:detail' player.id %}"> {{player.name}} </a>
-                                                 </span>
-                                            <span class = pData width="80px" height="45px">{{player.character}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.level}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.mrFloor}}</span>
-                                            <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
-                                    </div>  
-                                    
-                                </div>
-                            {% endfor %}
-                        </div>  
-                    </div>        
+                    {% endfor %}
+     
                 </div>  
     
                 

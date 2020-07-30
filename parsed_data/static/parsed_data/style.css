@@ -37,12 +37,12 @@ span{
 .dropbox2{
  
     width: 90%;
-    height: 450px;
     border: 2px solid rgb(167, 167, 223);
     overflow-y: scroll;
 }
 .partyBox{
     width:32%;
+    height:45%;
     float:left;
     padding-bottom: 10px;
 }
@@ -58,6 +58,13 @@ span{
     margin: 10px;
     border: 2px solid pink;
     overflow: auto;
-    height :100%
+    height :100%;
 
 }
+
+.buffBox{
+    float:right;
+    padding-top: 20px;
+    margin-top: 10px;
+}
+

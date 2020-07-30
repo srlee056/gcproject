@@ -11,14 +11,15 @@ from django.shortcuts import render, get_object_or_404
 
 def guild_player_list(request):
     
-    players = []
-    for i in range(0, 7) :
+    playersList = []
+    UCPlayers = PlayerData.objects.filter(party_id=0) 
+    for i in range(1, 7) :
         p = PlayerData.objects.filter(party_id=i) 
-        players.append(p) 
+        playersList.append(p) 
         #print (players[0])
     #players = PlayerData.objects.filter(party_id=1) 
     #  .order_by('-mrFloor')
-    return render (request, 'parsed_data/guild_player_list.html',{'players':players})
+    return render (request, 'parsed_data/guild_player_list.html',{'UCPlayers':UCPlayers,'playersList':playersList, 'range': range(1,7)})
 
 def detail(request, player_id):
     player=get_object_or_404(PlayerData, pk=player_id)

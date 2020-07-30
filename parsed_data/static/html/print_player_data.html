@@ -1,0 +1,35 @@
+<div class = dropbox2 id = p1 ondrop="drop(event);" ondragover="dragEnter(event);">
+                            
+    {% for player in players.1 %}
+
+        <div >   
+            <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
+                    
+                    <span class = pData><img src="{{player.imgSrc}}" height="45px"></span>
+                    
+                    <span class = pData width="120px" height="45px">
+                        <a href="{% url 'guild:detail' player.id %}"> {{player.name}} </a>
+                         </span>
+                    <span class = pData width="80px" height="45px">{{player.character}} </span>
+                    <span class = pData width="50px" height="45px">{{player.level}} </span>
+                    <span class = pData width="50px" height="45px">{{player.mrFloor}}</span>
+                    <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
+            </div>  
+            
+        </div>
+        <div class buffbox >
+            {% if player.character == "비숍" %}
+            <img src = "{% static 'parsed_data/images/advanced_blessing.png' %}" alt = "어블">
+            <img src = "{% static 'parsed_data/images/pray.png' %}" alt = "프레이">
+            {% elif player.character == "팔라딘" %}
+            <img src = "{% static 'parsed_data/images/combat_orders.png' %}" alt = "컴뱃">
+            {% elif player.character == "메카닉" %}
+            <img src = "{% static 'parsed_data/images/support_unit_H-EX.png' %}" alt = "웨이버">
+            {% elif player.character == "플레임위자드" %}
+            <img src = "{% static 'parsed_data/images/burning_region.png' %}" alt = "버닝리전">
+                
+            {% endif %}
+        </div>
+    {% endfor %}
+         
+</div>
