@@ -35,7 +35,7 @@ span{
     overflow-y: scroll;
 }
 .dropbox2{
- 
+    height:80%;
     width: 90%;
     border: 2px solid rgb(167, 167, 223);
     overflow-y: scroll;
@@ -62,9 +62,12 @@ span{
 
 }
 
-.buffBox{
+span.buffBox{
     float:right;
-    padding-top: 20px;
-    margin-top: 10px;
+    width:90%;
+    height:50px;
+    margin-right: 10px;
+    margin-top : 10px;
+    overflow-y: auto;
 }
 

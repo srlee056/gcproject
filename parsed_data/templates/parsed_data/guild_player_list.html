@@ -49,9 +49,7 @@
 
                         <div class = partyHeader width>파티</div>
                         
-                        <div class = dropbox2 ondrop="drop(event);" ondragover="dragEnter(event);">
-                            
-                            <span class = buffBox>
+                        <span class = buffBox>
                             {% for player in players %}
                              <!--이 부분 따로 table 만들어서 연동하는것으로 바꾸기-->
                                 {% if player.character == "비숍" %}
@@ -89,6 +87,10 @@
                             
                             {% endfor %}
                             </span>
+
+                        <div class = dropbox2 ondrop="drop(event);" ondragover="dragEnter(event);">
+                            
+                            
                             {% for player in players %}
                                 <div >   
                                     <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
