@@ -25,6 +25,14 @@ def detail(request, player_id):
     player=get_object_or_404(PlayerData, pk=player_id)
     return render(request, 'parsed_data/detail.html', {'player':player})
 
+'''
+def changeParty(request, player_id, party_id):
+    player=get_object_or_404(PlayerData, pk=player_id)
+    pParty=get_object_or_404(Party, pk=party_id)
+    player.party = pParty
+    player.save()
+    return HttpResponseRedirect(reverse('guild:player'))
+'''
 def vote(request, player_id):
     player=get_object_or_404(PlayerData, pk=player_id)
     pParty=get_object_or_404(Party, pk=request.POST['p_party'])

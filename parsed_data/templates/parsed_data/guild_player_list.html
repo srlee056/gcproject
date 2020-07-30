@@ -20,7 +20,7 @@
             <div class = left>
                 <div class = dropbox1 ondrop="drop(event);" ondragover="dragEnter(event);">
                 {% for player in UCPlayers %}
-
+                
                 <div >   
                     <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
                             
@@ -47,7 +47,7 @@
                     {% for players in playersList %}
                     <div class = partyBox>
 
-                        <div class = partyHeader width>파티</div>
+                        <div class = partyHeader width>{{forloop.counter}}파티</div>
                         
                         <span class = buffBox>
                             {% for player in players %}
@@ -88,12 +88,12 @@
                             {% endfor %}
                             </span>
 
-                        <div class = dropbox2 ondrop="drop(event);" ondragover="dragEnter(event);">
+                        <div class = dropbox2 id= {{forloop.counter}} ondrop="drop(event);" ondragover="dragEnter(event);">
                             
                             
                             {% for player in players %}
                                 <div >   
-                                    <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
+                                    <div style= "padding:5px; margin:5px" id = "{{player.id}}" draggable="true" ondragstart="drag(event);">
                                             
                                             <span class = pData><img src="{{player.imgSrc}}" height="45px"></span>
                                             
@@ -138,7 +138,18 @@
             function drop(ev) {
                 ev.preventDefault();
                 var data = ev.dataTransfer.getData('text');
-                ev.target.appendChild(document.getElementById(data));
+                draggedItem = document.getElementById(data);
+                draggedItem.style.color = 'red';
+                
+                ev.target.appendChild(draggedItem);
+                newPartyId = draggedItem.parentElement.id;
+                
+                draggedItem.pid = newPartyId;
+                draggedPlayer = draggedItem.id;
+
+                console.log(newPartyId);
+                console.log(draggedPlayer);
+
             }
 
         </script>
