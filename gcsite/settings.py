@@ -25,7 +25,7 @@ SECRET_KEY = 'sfl9=$6o!2+8qq*p*()_f2@1l2@(5_hcao)stza*bus&_m8g_2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['imsolem1226.pythonanywhere.com']
 
 
 # Application definition
