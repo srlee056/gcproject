@@ -49,16 +49,16 @@ def parse_guild_players():
         html2 = req2.text
         soup2 = BeautifulSoup(html2, 'html.parser')
 
-        avatarImgSrc= d.select(
+        avatarImgSrc= soup2.select(
             '#user-profile > section > div > div.col-lg-4.pt-1.pt-sm-0.pb-1.pb-sm-0.text-center.mt-2.mt-lg-0 > div > div.col-6.col-md-8.col-lg-6 > img'
         )
-        character = d.select(
+        character = soup2.select(
             '#user-profile > section > div > div.col-lg-8 > div.user-summary > ul > li:nth-child(2)'
             )
-        level = d.select(
+        level = soup2.select(
             '#user-profile > section > div > div.col-lg-8 > div.user-summary > ul > li:nth-child(1)'
             )
-        mrData = d.select{
+        mrData = soup2.select{
             '#app > div.card.border-bottom-0 > div > section > div.row.text-center > div:nth-child(1)'
         }
         if mrData.select('section > div > div.text-secondary') == '기록이 없습니다' :

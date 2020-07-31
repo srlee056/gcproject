@@ -28,8 +28,8 @@ span{
 }
 .dropbox1{
     border: 2px solid rgb(140, 151, 53);
-    width: 350px;
-    padding:10px;
+    width: 380px;
+    padding:5px;
     margin: 10px;
     height :100%;
     overflow-y: scroll;
@@ -71,3 +71,9 @@ span.buffBox{
     overflow-y: auto;
 }
 
+.playerBox{
+    width : 85%;
+    padding:2px; 
+    margin:2px; 
+    
+}

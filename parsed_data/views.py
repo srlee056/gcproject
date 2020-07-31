@@ -12,27 +12,28 @@ from django.shortcuts import render, get_object_or_404
 def guild_player_list(request):
     
     playersList = []
-    UCPlayers = PlayerData.objects.filter(party_id=0) 
-    for i in range(1, 7) :
-        p = PlayerData.objects.filter(party_id=i) 
+    UCPlayers = PlayerData.objects.filter(party_id=0).order_by('name') 
+    for i in range(1, 13) :
+        p = PlayerData.objects.filter(party_id=i).order_by('name')
         playersList.append(p) 
         #print (players[0])
     #players = PlayerData.objects.filter(party_id=1) 
     #  .order_by('-mrFloor')
-    return render (request, 'parsed_data/guild_player_list.html',{'UCPlayers':UCPlayers,'playersList':playersList, 'range': range(1,7)})
+    return render (request, 'parsed_data/guild_player_list.html',{'UCPlayers':UCPlayers,'playersList':playersList, 'range': range(1,13)})
 
 def detail(request, player_id):
     player=get_object_or_404(PlayerData, pk=player_id)
     return render(request, 'parsed_data/detail.html', {'player':player})
 
-'''
-def changeParty(request, player_id, party_id):
-    player=get_object_or_404(PlayerData, pk=player_id)
-    pParty=get_object_or_404(Party, pk=party_id)
+
+def changeParty(request):
+    player=get_object_or_404(PlayerData, pk=request.POST['player_id'])
+    pParty=get_object_or_404(Party, pk=request.POST['party_id'])
     player.party = pParty
     player.save()
+    print(player.party)
     return HttpResponseRedirect(reverse('guild:player'))
-'''
+
 def vote(request, player_id):
     player=get_object_or_404(PlayerData, pk=player_id)
     pParty=get_object_or_404(Party, pk=request.POST['p_party'])

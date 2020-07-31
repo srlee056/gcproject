@@ -5,11 +5,11 @@
         <title>Party Caculator</title>
         {% load static %}
         <link rel= "stylesheet" type="text/css" href = "{% static 'parsed_data/style.css' %}">
-        
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         
     </head>
     <body>
-
+        
         <div class = buttons>
             <button onclick="location.href='create'">추가</button>
             <button>파티 저장</button>
@@ -18,20 +18,20 @@
         <div>
             
             <div class = left>
-                <div class = dropbox1 ondrop="drop(event);" ondragover="dragEnter(event);">
+                <div class = dropbox1 id=0 ondrop="drop(event);" ondragover="dragEnter(event);">
                 {% for player in UCPlayers %}
                 
-                <div >   
-                    <div style= "padding:5px; margin:5px"id = "{{player.name}}" draggable="true" ondragstart="drag(event);">
+                <div > 
+                    <div class = playerBox id = {{player.id}} draggable="true" ondragstart="drag(event);" ondragover="noAllowDrop(event);" >
                             
-                            <span class = pData><img src="{{player.imgSrc}}" height="45px"></span>
+                            <span class = pData><img src="{{player.imgSrc}}" height="30px"></span>
                             
-                            <span class = pData width="120px" height="45px">
+                            <span class = pData width="120px" height="30px">
                                 <a href="{% url 'guild:detail' player.id %}"> {{player.name}} </a>
                                  </span>
-                            <span class = pData width="80px" height="45px">{{player.character}} </span>
-                            <span class = pData width="50px" height="45px">{{player.level}} </span>
-                            <span class = pData width="50px" height="45px">{{player.mrFloor}}</span>
+                            <span class = pData width="80px" height="30px">{{player.character}} </span>
+                            <span class = pData width="50px" height="30px">{{player.level}} </span>
+                            <span class = pData width="50px" height="30px">{{player.mrFloor}}층</span>
                             <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
                     </div>  
                     
@@ -93,16 +93,16 @@
                             
                             {% for player in players %}
                                 <div >   
-                                    <div style= "padding:5px; margin:5px" id = "{{player.id}}" draggable="true" ondragstart="drag(event);">
+                                    <div class = playerBox id = {{player.id}} draggable="true" ondragstart="drag(event);">
                                             
-                                            <span class = pData><img src="{{player.imgSrc}}" height="45px"></span>
+                                            <span class = pData><img src="{{player.imgSrc}}" height="30px"></span>
                                             
-                                            <span class = pData width="120px" height="45px">
+                                            <span class = pData width="120px" height="30px">
                                                 <a href="{% url 'guild:detail' player.id %}"> {{player.name}} </a>
                                                  </span>
-                                            <span class = pData width="80px" height="45px">{{player.character}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.level}} </span>
-                                            <span class = pData width="50px" height="45px">{{player.mrFloor}}</span>
+                                            <span class = pData width="80px" height="30px">{{player.character}} </span>
+                                            <span class = pData width="50px" height="30px">{{player.level}} </span>
+                                            <span class = pData width="50px" height="30px">{{player.mrFloor}}층</span>
                                             <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
                                     </div>  
                                     
@@ -127,6 +127,10 @@
 
         
         <script>
+            function noAllowDrop(ev) {
+                ev.stopPropagation();
+            }
+
             function dragEnter(ev) {
                 ev.preventDefault();
             }
@@ -140,17 +144,54 @@
                 var data = ev.dataTransfer.getData('text');
                 draggedItem = document.getElementById(data);
                 draggedItem.style.color = 'red';
-                
+                playerId = draggedItem.id 
                 ev.target.appendChild(draggedItem);
                 newPartyId = draggedItem.parentElement.id;
+    
                 
-                draggedItem.pid = newPartyId;
-                draggedPlayer = draggedItem.id;
-
+                $.ajax({
+                    
+                    type: "POST",
+                    url: "{% url 'guild:changeParty' %}",
+                    data: {
+                    'player_id': playerId,
+                    'party_id' : newPartyId,
+                    },
+                });
+                console.log(playerId);
                 console.log(newPartyId);
-                console.log(draggedPlayer);
-
             }
+
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            var csrftoken = getCookie('csrftoken');
+
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
 
         </script>
 

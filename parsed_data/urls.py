@@ -15,6 +15,8 @@ urlpatterns = [
 
     path('add/', views.add, name='add'),
 
+    path('changeParty/', views.changeParty, name='changeParty')
+
     
 
 ]
