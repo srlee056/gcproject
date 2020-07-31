@@ -11,9 +11,7 @@ div.left {
     float: left;
     
 }
-span.pData{
-    display: inline;
-}
+
 div.right {
     float : right;
     width : 100%;
@@ -22,10 +20,7 @@ div.right {
     box-sizing : border-box;
     
 }
-span{
-    display:inline-block;
-    
-}
+
 .dropbox1{
     border: 2px solid rgb(140, 151, 53);
     width: 380px;
@@ -62,6 +57,20 @@ span{
 
 }
 
+.playerBox{
+    width : 85%;
+    padding:2px; 
+    margin:2px; 
+    
+}
+
+span{
+    display:inline-block;
+
+}
+span.pData{
+    display: inline;
+}
 span.buffBox{
     float:right;
     width:90%;
@@ -69,11 +78,4 @@ span.buffBox{
     margin-right: 10px;
     margin-top : 10px;
     overflow-y: auto;
-}
-
-.playerBox{
-    width : 85%;
-    padding:2px; 
-    margin:2px; 
-    
 }
