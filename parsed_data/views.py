@@ -6,6 +6,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from django.shortcuts import render, get_object_or_404
+
+from . import parserByName
 # Create your views here.
 
 
@@ -14,7 +16,7 @@ def guild_player_list(request):
     playersList = []
     UCPlayers = PlayerData.objects.filter(party_id=0).order_by('name') 
     for i in range(1, 13) :
-        p = PlayerData.objects.filter(party_id=i).order_by('name')
+        p = PlayerData.objects.filter(party_id=i)
         playersList.append(p) 
         #print (players[0])
     #players = PlayerData.objects.filter(party_id=1) 
@@ -57,6 +59,12 @@ def create(request):
     
     return render(request, 'parsed_data/create.html', {'player':player})
 
+def createByName(request):
+    player = PlayerData(name="이름")
+    
+    return render(request, 'parsed_data/createByName.html', {'player':player})
+
+
 def add(request):
     player=PlayerData()
     pParty=get_object_or_404(Party, pk=request.POST['p_party'])
@@ -70,6 +78,13 @@ def add(request):
     player.save()
 
     return HttpResponseRedirect(reverse('guild:player'))
+
+def addByName(request):
+    player = parserByName.parse_by_name(request.POST['p_name'])
+    #player.save()
+
+    return HttpResponseRedirect(reverse('guild:player'))
+
 
 def delete(request, player_id):
     player=get_object_or_404(PlayerData, pk=player_id)

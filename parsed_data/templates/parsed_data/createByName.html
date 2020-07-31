@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Player create</title>
+        
+        
+    </head>
+    <body>
+        <h3>데이터는 maple.gg에서 가져옵니다.</h3>
+        <form action = "{% url 'guild:addByName' %}" method="post" width = "400px">
+            {% csrf_token %}
+            
+            <label> 이름 
+                <input type ="text" name = "p_name">
+            </label>
+            <br>
+            <br>
+        <input type="submit" value = "추가">    
+        </form>
+    </body>
+</html>

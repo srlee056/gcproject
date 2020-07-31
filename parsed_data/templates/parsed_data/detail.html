@@ -7,19 +7,26 @@
     <body>
         <form action = "{% url 'guild:vote' player.id %}" method="post" width = "400px">
             {% csrf_token %}
+            <label>캐릭터 이미지 링크:
             <input type = "text" name = "p_imgSrc" value = "{{player.imgSrc}}">
+            </label>
             <br>
+            <label for ="p_name">이름 :</label>
             <input type ="text" name = "p_name" value = "{{player.name}}">
             <br>
+            <label for ="p_character">직업</label>
             <input type ="text" name = "p_character" value = "{{player.character}}">
             <br>
+            <label for ="p_level">레벨 :</label>
             <input type ="text" name = "p_level" value = "{{player.level}}">
             <br>
+            <label for ="p_mrFloor">무릉 층수 :</label>
             <input type ="text" name = "p_mrFloor" value = "{{player.mrFloor}}">
             <br>
+            <label for ="p_party">수로 파티 :</label>
             <input type ="text" name = "p_party" value = {{player.party.id}}>
             <br>
-        <input type="submit" value = "Submit">    
+        <input type="submit" value = "저장">    
         </form>
     </body>
 </html>

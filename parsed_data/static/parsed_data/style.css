@@ -1,13 +1,15 @@
 body{
     background: white url("images/image.png") no-repeat;
     background-position: right bottom;
+
 }
 
 li a{
     color: green
 }
 div.left {
-    width: 400px;
+    width: 350px;
+    height : 94%;  
     float: left;
     
 }
@@ -15,35 +17,40 @@ div.left {
 div.right {
     float : right;
     width : 100%;
-    margin-left : -400px;
-    padding-left : 400px;
+    height : 93%;  
+    margin-left : -350px;
+    padding-left : 350px;
     box-sizing : border-box;
     
 }
 
 .dropbox1{
     border: 2px solid rgb(140, 151, 53);
-    width: 380px;
+    width: 95%;
     padding:5px;
     margin: 10px;
     height :100%;
     overflow-y: scroll;
 }
 .dropbox2{
-    height:80%;
+    height:75%;
     width: 90%;
+    padding-bottom: 30px;
+    margin-bottom: -30px;
     border: 2px solid rgb(167, 167, 223);
     overflow-y: scroll;
 }
 .partyBox{
     width:32%;
-    height:45%;
+    height:47%;
     float:left;
-    padding-bottom: 10px;
+
 }
 .partyHeader{
+    margin-top:-30px;
+    padding-top:35px;
     text-align:center;
-    color: rgb(167, 167, 223);
+    color: rgb(53, 53, 126);
     width: 90%;
 }
 
@@ -58,11 +65,9 @@ div.right {
 }
 
 .playerBox{
-    
-    width :80%;
-    padding:2px; 
+    width :220px;
+    padding:2px;
     margin:2px; 
-    
 }
 
 span{
@@ -70,13 +75,17 @@ span{
 
 }
 span.pData{
-    display: inline;
+    
 }
 span.buffBox{
-    float:right;
+    float:left;
     width:90%;
-    height:50px;
+    height:30px;
     margin-right: 10px;
-    margin-top : 10px;
+    margin-top : 5px;
     overflow-y: auto;
+}
+
+img.buffImg{
+    height:25px
 }

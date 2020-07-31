@@ -38,8 +38,8 @@ def parse_guild_players():
             '#user-profile > section > div > div.col-lg-8 > div.user-summary > ul > li:nth-child(1)'
             )
         lv = level[0].text
-        if lv.startswith('Lv.'):
-            lv = lv[3:]
+        #if lv.startswith('Lv.'):
+        #    lv = lv[3:]
         print(lv)
         mrData = soup2.select(
             '#app > div.card.border-bottom-0 > div > section > div.row.text-center > div:nth-child(1)'
@@ -61,13 +61,13 @@ def parse_guild_players():
         p2.mrFloor = mrFloor
         #print(character[0].text)
         #print(mrFloor)
-        party = Party()
-        party.id = 0
-        party.name="분류 전"
-        party.save()
-        
-        print(party)
-        p2.party = party
+        if(p2.party == None):
+            party = Party()
+            party.id = 0
+            party.name="분류 전"
+            party.save()
+            p2.party = party
+        print(p2.party)
         p2.save()
         '''data = []
 

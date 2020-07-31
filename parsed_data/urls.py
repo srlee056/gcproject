@@ -12,8 +12,10 @@ urlpatterns = [
     path('<int:player_id>/delete/', views.delete, name='delete'),
 
     path('create/', views.create, name='create'),
+    path('createByName/', views.createByName, name='createByName'),
 
     path('add/', views.add, name='add'),
+    path('addByName/', views.addByName, name='addByName'),
 
     path('changeParty/', views.changeParty, name='changeParty')
 
