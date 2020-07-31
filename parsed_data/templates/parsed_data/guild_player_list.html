@@ -21,7 +21,7 @@
                 <div class = dropbox1 id=0 ondrop="drop(event);" ondragover="dragEnter(event);">
                 {% for player in UCPlayers %}
                 
-                <div > 
+                
                     <div class = playerBox id = {{player.id}} draggable="true" ondragstart="drag(event);" ondragover="noAllowDrop(event);" >
                             
                             <span class = pData><img src="{{player.imgSrc}}" height="30px"></span>
@@ -35,7 +35,7 @@
                             <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
                     </div>  
                     
-                </div>
+                
                 {% endfor %}
                 </div>  
             </div>
@@ -92,7 +92,7 @@
                             
                             
                             {% for player in players %}
-                                <div >   
+                               
                                     <div class = playerBox id = {{player.id}} draggable="true" ondragstart="drag(event);">
                                             
                                             <span class = pData><img src="{{player.imgSrc}}" height="30px"></span>
@@ -106,7 +106,7 @@
                                             <span><a href = "{% url 'guild:delete' player.id %}" style = "font-size: x-small;">삭제</a></span> 
                                     </div>  
                                     
-                                </div>
+                                
                             {% endfor %}
                             
                             
