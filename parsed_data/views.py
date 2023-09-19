@@ -11,17 +11,18 @@ from . import parserByName
 # Create your views here.
 
 
-def guild_player_list(request):
+def guildPlayerList(request):
+    
+    UCPlayers = PlayerData.objects.filter(party_id=0).order_by('name') 
+    return render (request, 'parsed_data/guildPlayerList.html',{'UCPlayers':UCPlayers})
+
+def party_manager(request):
     
     playersList = []
-    UCPlayers = PlayerData.objects.filter(party_id=0).order_by('name') 
     for i in range(1, 13) :
         p = PlayerData.objects.filter(party_id=i)
         playersList.append(p) 
-        #print (players[0])
-    #players = PlayerData.objects.filter(party_id=1) 
-    #  .order_by('-mrFloor')
-    return render (request, 'parsed_data/guild_player_list.html',{'UCPlayers':UCPlayers,'playersList':playersList, 'range': range(1,13)})
+    return render (request, 'parsed_data/party_manager.html',{'playersList':playersList, 'range': range(1,13)})
 
 def detail(request, player_id):
     player=get_object_or_404(PlayerData, pk=player_id)
@@ -33,7 +34,7 @@ def changeParty(request):
     pParty=get_object_or_404(Party, pk=request.POST['party_id'])
     player.party = pParty
     player.save()
-    print(player.party)
+    print("saved")
     return HttpResponseRedirect(reverse('guild:player'))
 
 def vote(request, player_id):

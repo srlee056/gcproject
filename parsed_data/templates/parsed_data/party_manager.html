@@ -1,0 +1,181 @@
+
+
+<html>
+    <head>
+        <title>Party Caculator</title>
+        {% load static %}
+        <link rel= "stylesheet" type="text/css" href = "{% static 'parsed_data/style.css' %}">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        
+    </head>
+    <body>
+        
+        <div class = buttons>
+            <button onclick="location.href='guildPlayerList'">길드원 리스트 보기</button>
+            <button>파티초기화</button>
+            <button>파티저장</button>
+
+
+        </div>
+        <div>
+            
+            
+            <div> 
+                <div class = test>
+
+                    {% for players in playersList %}
+                    <div class = partyBox>
+                        
+                        <span class = buffBox>
+                            <!--이 부분 따로 table 만들어서 연동하는것으로 바꾸기-->
+                            {% for player in players %}
+                             
+                                {% if player.character == "비숍" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/advanced_blessing.png' %}" alt = "어블" >
+                                <img class = buffImg src = "{% static 'parsed_data/images/pray.png' %}" alt = "프레이">
+                                {% elif player.character == "팔라딘" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/combat_orders.png' %}" alt = "컴뱃">
+                                {% elif player.character == "메카닉" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/support_unit_H-EX.png' %}" alt = "웨이버">
+                                {% elif player.character == "플레임위자드" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/burning_region.png' %}" alt = "버닝리전">
+                                {% elif player.character == "와일드헌터" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/sharp_eyes.png' %}" alt = "샤프아이즈">
+                                <img class = buffImg src = "{% static 'parsed_data/images/hauling.png' %}" alt = "하울링">
+                                {% elif player.character == "패스파인더" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/sharp_eyes.png' %}" alt = "샤프아이즈">
+                                {% elif player.character == "보우마스터" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/sharp_eyes.png' %}" alt = "샤프아이즈">
+                                {% elif player.character == "신궁" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/sharp_eyes.png' %}" alt = "샤프아이즈">
+                                {% elif player.character == "윈드브레이커" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/sharp_eyes.png' %}" alt = "샤프아이즈">
+                                {% elif player.character == "제로" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/zero_time_distortion.png' %}" alt = "타임디스토션">
+                                {% elif player.character == "은월" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/soul_splitter.png' %}" alt = "분혼격참">
+                                {% elif player.character == "캡틴" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/wind_booster.png' %}" alt = "윈드부스터">
+                                {% elif player.character == "바이퍼" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/wind_booster.png' %}" alt = "윈드부스터">
+                                {% elif player.character == "캐논슈터" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/wind_booster.png' %}" alt = "윈드부스터">
+                                {% elif player.character == "배틀메이지" %}
+                                <img class = buffImg src = "{% static 'parsed_data/images/debuf_aura.png' %}" alt = "디버프오라">
+                                    
+                                {% endif %}
+                            
+                            {% endfor %}
+                            </span>
+
+                        <div class = dropbox2 id= {{forloop.counter}} ondrop="drop(event);" ondragover="dragEnter(event);">
+                            
+                            {% for player in players %}
+                               
+                                <div class = playerBox id = {{player.id}} draggable="true" ondragstart="drag(event);" ondragover="noAllowDrop(event);">
+                                                                                   
+                                    <span class = pData><img src="{{player.imgSrc}}" height="30px"></span>
+                                    <span>
+                                        <span class = pData width="120px" style = "font-size: small;">{{player.name}}</span>
+                                        <span class = pData width="80px" style = "font-size: small;">{{player.character}} </span>
+                                        <br>
+                                        <span class = pData width="50px" style = "font-size: small;">{{player.level}} </span>
+                                        <span class = pData width="50px" style = "font-size: small;">{{player.mrFloor}}층</span>
+                                        <br>                            
+                                    </span>
+                                            
+                                </div>  
+                                    
+                                
+                            {% endfor %}
+                            
+                            
+                                 
+                        </div>
+                        <div class = partyHeader width>{{forloop.counter}}파티</div>
+                    
+                    </div>
+                    {% endfor %}
+     
+                </div>  
+    
+                
+            </div>
+           
+          
+        </div>
+        
+
+        
+        <script>
+            function noAllowDrop(ev) {
+                ev.stopPropagation();
+            }
+
+            function dragEnter(ev) {
+                ev.preventDefault();
+            }
+    
+            function drag(ev) {
+                ev.dataTransfer.setData('text', ev.target.id);
+            }
+    
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData('text');
+                draggedItem = document.getElementById(data);
+                draggedItem.style.color = 'red';
+                playerId = draggedItem.id 
+                ev.target.appendChild(draggedItem);
+                newPartyId = draggedItem.parentElement.id;
+    
+                
+                $.ajax({
+                    
+                    type: "POST",
+                    url: "{% url 'guild:changeParty' %}",
+                    data: {
+                    'player_id': playerId,
+                    'party_id' : newPartyId,
+                    },
+                });
+                console.log(playerId);
+                console.log(newPartyId);
+            }
+
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            var csrftoken = getCookie('csrftoken');
+
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+
+        </script>
+
+    </body>
+
+</html>

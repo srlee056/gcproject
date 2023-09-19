@@ -3,7 +3,8 @@ from . import views
 
 app_name = 'guild'
 urlpatterns = [
-    path("", views.guild_player_list, name='player'),
+    path("", views.party_manager, name='player'),
+    path("guildPlayerList/", views.guildPlayerList, name='player'),
 
     path('<int:player_id>/', views.detail, name = 'detail'),
 
