@@ -1,7 +1,6 @@
 # gcproject
+메이플스토리 길드 수로 관리 프로그램 (2020)
 
 __실행화면 (20.07.29 ver)__
 
-![Alt Text](https://thumbs.gfycat.com/FlawlessWindingApatosaur-size_restricted.gif)
-
-고화질로 보려면 [클릭](https://gfycat.com/ko/flawlesswindingapatosaur)
+[영상](gcproject_200729.mov)
